@@ -97,7 +97,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WqH-fg-PFA">
                                 <rect key="frame" x="10" y="74" width="172" height="172"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="WqH-fg-PFA" secondAttribute="height" multiplier="1:1" id="ACj-e1-tGo"/>
                                     <constraint firstAttribute="width" constant="172" id="FxE-gF-Tib"/>
                                     <constraint firstAttribute="height" constant="172" id="Qq2-k1-Gbf"/>
                                 </constraints>
