@@ -81,6 +81,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="FIlms" id="9Ke-Ar-YP3"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="WyM-uk-OuD">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MAv-WS-a1Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

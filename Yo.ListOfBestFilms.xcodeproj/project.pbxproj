@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		007D9C5EA51CD0ABC5E674EF /* Pods_Yo_ListOfBestFilms.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2983DDA1D2717924AB07A70B /* Pods_Yo_ListOfBestFilms.framework */; };
 		0844120EF6DE3E2BB817E116 /* Pods_Yo_ListOfBestFilms_Yo_ListOfBestFilmsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E5FC1356F706631AD442E7 /* Pods_Yo_ListOfBestFilms_Yo_ListOfBestFilmsTests.framework */; };
+		712348CE217CC74500FC606A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712348CD217CC74500FC606A /* Extensions.swift */; };
+		712348D0217CC78700FC606A /* Interactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712348CF217CC78700FC606A /* Interactive.swift */; };
 		7141889A2178E56200A6C900 /* ListOfFilmsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714188992178E56200A6C900 /* ListOfFilmsTableViewController.swift */; };
 		7141889C2178E58E00A6C900 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7141889B2178E58E00A6C900 /* DetailViewController.swift */; };
 		7141889F2178E67100A6C900 /* FilmsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7141889E2178E67100A6C900 /* FilmsTableViewCell.swift */; };
@@ -38,6 +40,8 @@
 		2D76793803647FF11F884412 /* Pods-Yo.ListOfBestFilms.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yo.ListOfBestFilms.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yo.ListOfBestFilms/Pods-Yo.ListOfBestFilms.debug.xcconfig"; sourceTree = "<group>"; };
 		30E5FC1356F706631AD442E7 /* Pods_Yo_ListOfBestFilms_Yo_ListOfBestFilmsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yo_ListOfBestFilms_Yo_ListOfBestFilmsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E5BB28D7A5651C9B09F5E2C /* Pods-Yo.ListOfBestFilmsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yo.ListOfBestFilmsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yo.ListOfBestFilmsTests/Pods-Yo.ListOfBestFilmsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		712348CD217CC74500FC606A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		712348CF217CC78700FC606A /* Interactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactive.swift; sourceTree = "<group>"; };
 		714188992178E56200A6C900 /* ListOfFilmsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfFilmsTableViewController.swift; sourceTree = "<group>"; };
 		7141889B2178E58E00A6C900 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		7141889E2178E67100A6C900 /* FilmsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsTableViewCell.swift; sourceTree = "<group>"; };
@@ -79,6 +83,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		712348CC217CC70D00FC606A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				712348CD217CC74500FC606A /* Extensions.swift */,
+				712348CF217CC78700FC606A /* Interactive.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		714188982178E52400A6C900 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,7 +134,8 @@
 		71A095222178E29800A5A796 /* Yo.ListOfBestFilms */ = {
 			isa = PBXGroup;
 			children = (
-				71F247862179D31000117603 /* Manager */,
+				712348CC217CC70D00FC606A /* Helpers */,
+				71F247862179D31000117603 /* Managers */,
 				71F247852179D30600117603 /* Model */,
 				7141889D2178E59A00A6C900 /* Views */,
 				714188982178E52400A6C900 /* Controllers */,
@@ -149,12 +163,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		71F247862179D31000117603 /* Manager */ = {
+		71F247862179D31000117603 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				71F247872179D33700117603 /* NetworkManager.swift */,
 			);
-			path = Manager;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		8662F7A08F49A09F82ED1685 /* Frameworks */ = {
@@ -345,10 +359,12 @@
 			files = (
 				7141889C2178E58E00A6C900 /* DetailViewController.swift in Sources */,
 				71F2478A2179D3F900117603 /* Films.swift in Sources */,
+				712348D0217CC78700FC606A /* Interactive.swift in Sources */,
 				7141889F2178E67100A6C900 /* FilmsTableViewCell.swift in Sources */,
 				71F247882179D33700117603 /* NetworkManager.swift in Sources */,
 				7141889A2178E56200A6C900 /* ListOfFilmsTableViewController.swift in Sources */,
 				71A095242178E29800A5A796 /* AppDelegate.swift in Sources */,
+				712348CE217CC74500FC606A /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
