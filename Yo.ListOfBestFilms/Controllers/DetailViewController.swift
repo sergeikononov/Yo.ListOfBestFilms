@@ -9,7 +9,6 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-    
     var film: Film!
     
     @IBOutlet weak var image: UIImageView!

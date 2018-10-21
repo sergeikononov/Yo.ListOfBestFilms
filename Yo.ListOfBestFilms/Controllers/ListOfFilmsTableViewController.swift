@@ -9,7 +9,6 @@
 import UIKit
 
 class ListOfFilmsTableViewController: UITableViewController {
-    
     var listOfFilms: [Film] = []
     var groupedFilms: [GroupedFilms] = []
 
@@ -41,8 +40,8 @@ class ListOfFilmsTableViewController: UITableViewController {
     func mappingFilms(list: [Film]) {
         for item in list {
             if !self.groupedFilms.contains(where: {$0.year == item.year}) {
-                let temp = list.filter{$0.year == item.year}.sorted { (first, second) -> Bool in
-                    if (first.rating! > second.rating!) {
+                let temp = list.filter { $0.year == item.year }.sorted { (first, second) -> Bool in
+                    if first.rating! > second.rating! {
                         return true
                     } else {
                         return false
@@ -80,20 +79,24 @@ class ListOfFilmsTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "films", for: indexPath) as! FilmsTableViewCell
         
-        let item = self.groupedFilms[indexPath.section].films[indexPath.row]
-
-        
-        cell.name.text = item.localized_name
-        cell.nativeName.text = item.name
-        if item.rating! != 11 {
-            cell.raiting.text = String(item.rating!)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "films", for: indexPath) as? FilmsTableViewCell {
+            
+            let item = self.groupedFilms[indexPath.section].films[indexPath.row]
+            
+            cell.name.text = item.localizedName
+            cell.nativeName.text = item.name
+            if item.rating! != 11 {
+                cell.raiting.text = String(item.rating!)
+            } else {
+                cell.raiting.text = "No raiting"
+            }
+            
+            return cell
         } else {
-            cell.raiting.text = "No raiting"
+            let cell = tableView.dequeueReusableCell(withIdentifier: "films", for: indexPath)
+            return cell
         }
-
-        return cell
     }
 
 
@@ -102,10 +105,13 @@ class ListOfFilmsTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detail" {
-            let destination = segue.destination as! DetailViewController
-            if let indexPath = (tableView.indexPathForSelectedRow as IndexPath?) {
-                destination.film = self.groupedFilms[indexPath.section].films[indexPath.row]
-                destination.navigationItem.title = self.groupedFilms[indexPath.section].films[indexPath.row].localized_name
+            if let destination = segue.destination as? DetailViewController {
+                if let indexPath = (tableView.indexPathForSelectedRow as IndexPath?) {
+                    destination.film = self.groupedFilms[indexPath.section].films[indexPath.row]
+                    destination.navigationItem.title = self.groupedFilms[indexPath.section].films[indexPath.row].localizedName
+                } else {
+                    return
+                }
             }
         }
     }
