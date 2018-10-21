@@ -16,7 +16,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var raiting: UILabel!
     @IBOutlet weak var desc: UILabel!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         if film.imageURL != "" {
