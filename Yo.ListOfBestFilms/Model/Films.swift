@@ -17,6 +17,7 @@ struct Film {
     let rating: Double?
     let imageURL: String?
     let description: String?
+    
     static func fromJSON(json: [JSON]) -> [Film]? {
         
         return json.compactMap { jsonItem -> Film in

@@ -17,7 +17,6 @@ class ListOfFilmsTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 85.0
         tableView.rowHeight = UITableView.automaticDimension
         getFilms()
-        
         refreshControl?.addTarget(self, action: #selector(self.refreshTable), for: UIControl.Event.valueChanged)
     }
     
