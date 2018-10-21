@@ -11,21 +11,19 @@ import UIKit
 class ListOfFilmsTableViewController: UITableViewController {
     
     var listOfFilms: [Film] = []
+    var groupedFilms: [GroupedFilms] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.estimatedRowHeight = 85.0
+        tableView.rowHeight = UITableView.automaticDimension
         getFilms()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     func getFilms() {
         NetworkManager.sharedInstance.getListOfFilms(success: { (films) in
             if films != nil {
-                self.appendFilms(list: films!)
+                self.mappingFilms(list: films!)
                 self.tableView.reloadData()
             }
         }) { (error) in
@@ -33,20 +31,23 @@ class ListOfFilmsTableViewController: UITableViewController {
         }
     }
     
-    func appendFilms(list: [Film]) {
+    func mappingFilms(list: [Film]) {
         for item in list {
-            self.listOfFilms.append(item)
-        }
-        
-        listOfFilms = listOfFilms.sorted { (first, second) -> Bool in
-            if first.year <= second.year {
-                return true
-            } 
-            if first.rating! > second.rating! {
-                return true
+            if !self.groupedFilms.contains(where: {$0.year == item.year}) {
+                let temp = list.filter{$0.year == item.year}.sorted { (first, second) -> Bool in
+                    if (first.rating! > second.rating!) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+                self.groupedFilms.append(GroupedFilms(year: item.year, films: temp))
             } else {
-                return false
+                let index = self.groupedFilms.indices.first!
+                self.groupedFilms[index].films.append(item)
             }
+            
+            self.groupedFilms.sort {$0.year < $1.year }
         }
     }
 
@@ -54,23 +55,39 @@ class ListOfFilmsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return self.groupedFilms.count
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = String(self.groupedFilms[section].year)
+        label.textAlignment = .center
+        label.backgroundColor = .lightGray
+        return label
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return groupedFilms[section].films.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "films", for: indexPath) as! FilmsTableViewCell
+        
+        let item = self.groupedFilms[indexPath.section].films[indexPath.row]
 
-        // Configure the cell...
+        
+        cell.name.text = item.localized_name
+        cell.nativeName.text = item.name
+        if item.rating! != 11 {
+            cell.raiting.text = String(item.rating!)
+        } else {
+            cell.raiting.text = "No raiting"
+        }
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -107,14 +124,24 @@ class ListOfFilmsTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "detail" {
+            let destination = segue.destination as! DetailViewController
+            if let indexPath = (tableView.indexPathForSelectedRow as IndexPath?) {
+                destination.film = self.groupedFilms[indexPath.section].films[indexPath.row]
+                destination.navigationItem.title = self.groupedFilms[indexPath.section].films[indexPath.row].localized_name
+            }
+        }
     }
-    */
 
+}
+
+extension Array where Element: Equatable {
+    func indexes(of element: Element) -> [Int] {
+        return self.enumerated().filter({ element == $0.element }).map({ $0.offset })
+    }
 }

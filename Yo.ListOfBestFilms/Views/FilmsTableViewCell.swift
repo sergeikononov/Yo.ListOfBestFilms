@@ -9,6 +9,11 @@
 import UIKit
 
 class FilmsTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var nativeName: UILabel!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var raiting: UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
